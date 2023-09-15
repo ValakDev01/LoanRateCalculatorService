@@ -6,10 +6,10 @@ This project aims to create and implement a website that allows you to calculate
 1. Clone this repository on your computer.
 2. Navigate to your project folder in the terminal or console.
 3. Run `npm install` to install the required dependencies.
-4. After installing the dependencies, you can start the application with the npm start command.
+4. After installing the dependencies, you can start the application with the `npm start` command.
 5. Navigate to the ' /src/data ' folder in the terminal.
 6. Run `npm install` to install the required dependencies.
-7. Run npm start to check if the database works properly but first send the request from the rest.http file.
+7. Run `npm start` to check if the database works properly but first send the request from the rest.http file.
 
 ##Dockerfile Run
 1. `docker build -t 01 .`
