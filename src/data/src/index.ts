@@ -1,20 +1,29 @@
 import { AppDataSource } from "./data-source"
 import { User } from "./entity/User"
+import axios from "axios";
 
-AppDataSource.initialize().then(async () => {
+AppDataSource.initialize()
+  .then(async () => {
+    axios
+      .get("http://localhost:3000/getReferenceRate")
+      .then(async (response) => {
+        const { savedRate, lastFetchDateResponse, nIAARR, nRFA } =
+          response.data;
 
-    console.log("Inserting a new user into the database...")
-    const user = new User()
-    user.installmentAmount = 1
-    user.financingAmount = 1
-    user.referenceRate = 25
-    await AppDataSource.manager.save(user)
-    console.log("Saved a new user with id: " + user.id)
+        const user = new User();
+        user.installmentAmount = nIAARR;
+        user.financingAmount = nRFA;
+        user.referenceRate = savedRate;
+        user.lastFetchDateResponse = lastFetchDateResponse;
 
-    console.log("Loading users from the database...")
-    const users = await AppDataSource.manager.find(User)
-    console.log("Loaded users: ", users)
+        await AppDataSource.manager.save(user);
+        console.log("Saved a new rate with id: " + user.id);
 
-    console.log("Here you can setup and run express / fastify / any other framework.")
-
-}).catch(error => console.log(error))
+        const users = await AppDataSource.manager.find(User);
+        console.log("Loaded rates: ", users);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  })
+  .catch((error) => console.log(error));
