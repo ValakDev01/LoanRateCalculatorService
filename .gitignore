@@ -1,4 +1,3 @@
 backend-combined.log
 backend-error.log
-.dockerignore
 node_modules
