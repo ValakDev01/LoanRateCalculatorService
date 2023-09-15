@@ -1,0 +1,10 @@
+POST http://localhost:3000/calculate
+Content-Type: application/json
+
+{
+    "numberOfInstallments": "36",
+    "remainingInstallments": "20",
+    "installmentAmount": "100",
+    "financingAmount": "3600",
+    "interestRate": "2"
+}
