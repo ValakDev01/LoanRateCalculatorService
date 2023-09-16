@@ -25,3 +25,10 @@ This project aims to create and implement a website that allows you to calculate
 4. Joi -> https://www.npmjs.com/package/joi
 5. Winston -> https://github.com/winstonjs/winston
 6. Dotenv -> https://www.npmjs.com/package/dotenv
+7. Axios -> https://axios-http.com/
+8. Docker -> https://www.docker.com/
+9. Nodemailer -> https://nodemailer.com/
+10. Nodemon -> https://www.npmjs.com/package/nodemon
+11. TypeORM -> https://typeorm.io/
+12. TypeScript -> https://www.typescriptlang.org/
+13. Xml2js -> https://www.npmjs.com/package/xml2js
