@@ -8,6 +8,8 @@ dotenv.config();
 let API_URL: string | undefined = process.env.API_URL;
 let API_URL_SECOND: string | undefined = process.env.API_URL_SECOND;
 
+let lastFetchDate: string | null = null;
+
 async function fetchAndSetReferenceRate() {
   try {
     if (!API_URL || !API_URL_SECOND) {
@@ -25,11 +27,11 @@ async function fetchAndSetReferenceRate() {
     );
 
     const today: string = new Date().toISOString().split("T")[0];
-    let lastFetchDate: string | null = null;
 
     if (lastFetchDate === today) {
       logger.info(`Dzisiaj już pobrano stawkę referencyjną.`);
     } else {
+      
       lastFetchDate = today;
 
       await axios.post(API_URL_SECOND, {
