@@ -32,3 +32,4 @@ This project aims to create and implement a website that allows you to calculate
 11. TypeORM -> https://typeorm.io/
 12. TypeScript -> https://www.typescriptlang.org/
 13. Xml2js -> https://www.npmjs.com/package/xml2js
+14. Brevo -> https://app.brevo.com

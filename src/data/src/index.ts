@@ -1,6 +1,7 @@
 import { AppDataSource } from "./data-source";
 import { User } from "./entity/User";
 import axios from "axios";
+import logger from '../../logger';
 
 AppDataSource.initialize()
   .then(async () => {
@@ -17,14 +18,14 @@ AppDataSource.initialize()
       user.lastFetchDateResponse = lastFetchDateResponse;
 
       await AppDataSource.manager.save(user);
-      console.log("Saved a new rate with id: " + user.id);
+      logger.info("Saved a new rate with id: " + user.id);
 
       const users = await AppDataSource.manager.find(User);
-      console.log("Loaded rates: ", users);
+      logger.info("Loaded rates: ", users);
     } catch (error) {
-      console.log(error);
+      logger.error(error);
     }
   })
   .catch((error) => {
-    console.error(error);
+    logger.error(error);
   });
