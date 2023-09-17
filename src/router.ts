@@ -4,13 +4,18 @@ import creditSchema from "./models/creditModel";
 import logger from "./logger";
 import fetchAndSetReferenceRate from "./controllers/referenceRateController";
 import ERROR_MESSAGES from './services/errorMessages';
+import * as dotenv from "dotenv";
+
+dotenv.config();
 
 let savedRate: number | null = null;
-let lastFetchDateResponse: Date | null = null;
+let lastFetchDateResponse: string | null = null;
 let nIAARR: number | null = null;
 let nRFA: number | null = null;
 
 const router: Router = express.Router();
+
+const RECIPIENT_ADDRESS: string | undefined = process.env.RECIPIENT_ADDRESS;
 
 router.post("/setReferenceRate", (req: Request, res: Response) => {
   const { rate, date } = req.body;
@@ -76,7 +81,7 @@ router.post('/calculate', (req: Request, res: Response) => {
           ERROR_MESSAGES.NEGATIVE_INSTALLMENT_VALUE
         );
 
-        sendEmail();
+        sendEmail(RECIPIENT_ADDRESS, newInstallmentAmountAtReferenceRate, lastFetchDateResponse);
 
         return res
           .status(400)
@@ -107,5 +112,8 @@ router.post('/calculate', (req: Request, res: Response) => {
 });
 
 fetchAndSetReferenceRate();
+
+//If you want to check the operation of the function below, comment out the following line of code
+// sendEmail(RECIPIENT_ADDRESS, -199.99, lastFetchDateResponse);
 
 export default router;
