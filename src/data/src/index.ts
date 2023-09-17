@@ -2,13 +2,10 @@ import { AppDataSource } from "./data-source"
 import { User } from "./entity/User"
 import axios from "axios";
 
-AppDataSource.initialize()
-  .then(async () => {
-    axios
-      .get("http://localhost:3000/getReferenceRate")
-      .then(async (response) => {
-        const { savedRate, lastFetchDateResponse, nIAARR, nRFA } =
-          response.data;
+AppDataSource.initialize().then(async () => {
+  try {
+    const response = await axios.get('http://localhost:3000/getReferenceRate');
+      const { savedRate, lastFetchDateResponse, nIAARR, nRFA } = response.data;
 
         const user = new User();
         user.installmentAmount = nIAARR;
@@ -21,9 +18,10 @@ AppDataSource.initialize()
 
         const users = await AppDataSource.manager.find(User);
         console.log("Loaded rates: ", users);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+      } catch (error) {
+        console.log(error);
+      }
   })
-  .catch((error) => console.log(error));
+  .catch((error) => {
+    console.error(error);
+  });
