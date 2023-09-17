@@ -114,6 +114,6 @@ router.post('/calculate', (req: Request, res: Response) => {
 fetchAndSetReferenceRate();
 
 //If you want to check the operation of the function below, comment out the following line of code
-// sendEmail(RECIPIENT_ADDRESS, -199.99, lastFetchDateResponse);
+// sendEmail(RECIPIENT_ADDRESS, -199.99, new Date().toISOString().split("T")[0]);
 
 export default router;
